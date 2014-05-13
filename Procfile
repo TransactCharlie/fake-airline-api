@@ -1,1 +1,1 @@
-web: gunicorn fake_airline_api:run_api
+web: python fake_airline_api.py
