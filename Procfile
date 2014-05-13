@@ -1,1 +1,1 @@
-web: gunicorn fake_airline_api:app
+web: gunicorn fake_airline_api:run_api

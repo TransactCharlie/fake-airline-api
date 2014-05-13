@@ -40,8 +40,7 @@ def api(from_iata, to_iata, departure_date, return_date):
 
 
 
-# Run the application
-if __name__ == "__main__":
+def run_api():
     # Turn on application debugging
     app.debug = True
     # Disable access control (otherwise only this machine could see the api)
@@ -50,3 +49,9 @@ if __name__ == "__main__":
     app.threaded = True
     # Run the application
     app.run()
+
+
+
+# Run the application
+if __name__ == "__main__":
+    run_api()
