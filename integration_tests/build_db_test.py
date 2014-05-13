@@ -5,7 +5,6 @@ import json
 import unittest
 import fake_airline_api
 from data_lodaer import db_init
-import config
 
 TEST_DATA_FILENAME = "integration_test_data.csv"
 
