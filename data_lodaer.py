@@ -7,20 +7,15 @@ import sqlite3
 import csv
 
 from config import DATABASE_NAME, DATA_FILE_NAME
+from sql_statements import CREATE_PRICES_TABLE, INSERT_PRICES_TABLE
+from db_tools import std_connection
 
 
 
 def create_prices_table(con):
     """creates the table route_prices on the database (con)"""
     cur = con.cursor()
-    cur.execute("""
-        CREATE TABLE route_prices (
-            FromIATA text,
-            ToIATA TEXT,
-            DepartureDate DATE,
-            ReturnDate DATE,
-            Price MONEY)"""
-        )
+    cur.execute(CREATE_PRICES_TABLE)
     con.commit()
 
 
@@ -28,28 +23,13 @@ def create_prices_table(con):
 def insert_price_data(con, data):
     """inserts the data into the connection"""
     cursor = con.cursor()
-    SQL = """
-        INSERT INTO route_prices (
-            FromIATA,
-            ToIATA,
-            DepartureDate,
-            ReturnDate,
-            Price
-            )
-            VALUES (
-                :FromIATA,
-                :ToIATA,
-                :DepartureDate,
-                :ReturnDate,
-                :Price
-                )"""
+    SQL = INSERT_PRICES_TABLE
 
     for d in data:
         cursor.execute(SQL, d)
         print "Inserted", d
 
     con.commit()
-
 
 
 
@@ -66,7 +46,7 @@ if __name__ == "__main__":
     os.remove(DATABASE_NAME)
 
     # Get a connection to the database (making a new one in the process)
-    conn = sqlite3.connect(DATABASE_NAME)
+    conn = std_connection()
 
     # Create the table
     create_prices_table(conn)

@@ -4,7 +4,7 @@ from flask import Flask
 from db_tools import std_connection
 import json
 
-from sql_queries import FULLY_QUALIFIED_PRICE_QUERY, ALL_PRICES_QUERY
+from sql_statements import FULLY_QUALIFIED_PRICE_QUERY, ALL_PRICES_QUERY
 
 # Register the Flask Container
 app = Flask(__name__)
