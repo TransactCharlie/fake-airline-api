@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.route('/all_routes')
-def raw_db():
+def all_routes():
     """returns all the routes we have!"""
     with std_connection() as conn:
         rows = conn.execute(ALL_PRICES_QUERY)

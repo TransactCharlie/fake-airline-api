@@ -3,7 +3,6 @@ __author__ = 'Charlie'
 # It will wipe the database if any data exists
 
 import os
-import sqlite3
 import csv
 
 from config import DATABASE_NAME, DATA_FILE_NAME
@@ -20,14 +19,15 @@ def create_prices_table(con):
 
 
 
-def insert_price_data(con, data):
+def insert_price_data(con, data, debug = False):
     """inserts the data into the connection"""
     cursor = con.cursor()
     SQL = INSERT_PRICES_TABLE
 
     for d in data:
         cursor.execute(SQL, d)
-        print "Inserted", d
+        if debug:
+            print "Inserted", d
 
     con.commit()
 
@@ -41,9 +41,12 @@ def read_data_file(data_file_name):
 
 
 
-if __name__ == "__main__":
+def db_init(data_file, debug = True):
+    """wupes and initialises the database with the file specified"""
+
     # drop the database
-    os.remove(DATABASE_NAME)
+    if os.path.isfile(DATABASE_NAME):
+        os.remove(DATABASE_NAME)
 
     # Get a connection to the database (making a new one in the process)
     conn = std_connection()
@@ -52,8 +55,12 @@ if __name__ == "__main__":
     create_prices_table(conn)
 
     # Load the table from the file.
-    data = read_data_file(DATA_FILE_NAME)
+    data = read_data_file(data_file)
 
     # Insert it
-    insert_price_data(conn, data)
+    insert_price_data(conn, data, debug)
 
+
+
+if __name__ == "__main__":
+    db_init(DATA_FILE_NAME)
