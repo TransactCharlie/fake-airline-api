@@ -54,3 +54,27 @@ The project uses:
 6. run the API.
 
 	`python fake_airline_api.py`
+
+## Test Call
+open a browser and connect to: [http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07](http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07)
+ 
+You should get back a json object that looks like:
+
+```json
+[
+  {
+    "Price": 100,
+    "ToIATA": "LHR",
+    "ReturnDate": "2014-04-07",
+    "DepartureDate": "2014-04-01",
+    "FromIATA": "EDI"
+  },
+  {
+    "Price": 5000,
+    "ToIATA": "EWR",
+    "ReturnDate": "2014-08-12",
+    "DepartureDate": "2014-08-04",
+    "FromIATA": "GLA"
+  }
+]
+```
