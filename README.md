@@ -56,8 +56,8 @@ The project uses:
 	`python fake_airline_api.py`
 
 ## Test Call
-open a browser and connect to: [http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07](http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07)
- 
+open a browser and connect to: [http://localhost:5000/all_routes](http://localhost:5000/all_routes)
+
 You should get back a json object that looks like:
 
 ```json
@@ -78,3 +78,22 @@ You should get back a json object that looks like:
   }
 ]
 ```
+
+## api documentation
+
+**TODO!**
+
+call: [http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07](http://localhost:5000/api/EDI/LHR/2014-04-01/2014-04-07)
+
+Response:
+
+```json
+[
+  {
+    "Price": 100,
+    "ToIATA": "LHR",
+    "ReturnDate": "2014-04-07",
+    "DepartureDate": "2014-04-01",
+    "FromIATA": "EDI"
+  }
+]```

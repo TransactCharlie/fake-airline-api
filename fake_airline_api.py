@@ -1,6 +1,6 @@
 __author__ = 'Charlie'
 
-from flask import Flask
+from flask import Flask, Response
 from db_tools import std_connection
 import json
 
@@ -11,12 +11,19 @@ app = Flask(__name__)
 
 
 
+def parcel_json_response(payload):
+    """returns a Response() object with payload, status 200, mimetype application/json"""
+    return Response(response = payload, status = 200, mimetype = "application/json")
+
+
+
 @app.route('/all_routes')
 def all_routes():
     """returns all the routes we have!"""
     with std_connection() as conn:
         rows = conn.execute(ALL_PRICES_QUERY)
-        return json.dumps(rows.fetchall(), indent = 4)
+        res = json.dumps(rows.fetchall())
+        return parcel_json_response(res)
 
 
 
@@ -35,8 +42,9 @@ def api(from_iata, to_iata, departure_date, return_date):
             }
 
         rows = conn.execute(SQL, filters)
+        res = json.dumps(rows.fetchall())
 
-        return json.dumps(rows.fetchall(), indent=4)
+        return parcel_json_response(res)
 
 
 
